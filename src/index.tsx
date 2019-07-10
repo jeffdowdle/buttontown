@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, FunctionComponent } from "react";
 import ReactDOM from "react-dom";
-import { Router, Link } from "@reach/router";
+import { Router, Link, RouteComponentProps } from "@reach/router";
 import "normalize.css";
 import DebugPage from "./pages/DebugPage";
 import Catalogue from "./catalogue/Catalogue";
@@ -9,6 +9,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./baseTheme";
 import useGlobals from "./utils/useGlobals";
 import GridPage from "./pages/GridPage";
+import Route from './utils/Route';
 
 export const AppContext = React.createContext({});
 export const GridContext = React.createContext({});
@@ -45,9 +46,9 @@ const App = () => {
             <Link to="/catalogue">Catalogue</Link>
             <DebugModeToggle />
             <Router>
-              <GridPage path="/" />
-              <DebugPage path="/debug" />
-              <Catalogue path="/catalogue/*" />
+              <Route component={GridPage} path="/" />
+              <Route component={DebugPage} path="/debug" />
+              <Route component={Catalogue} path="/catalogue/*" />
             </Router>
           </GlobalsContext.Provider>
         </AppContext.Provider>

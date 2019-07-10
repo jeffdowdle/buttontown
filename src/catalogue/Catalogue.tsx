@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import Grid from "../Grid";
+import Grid from "../grid/Grid";
 import widgets from "../widgets";
 import { Router, Link } from "@reach/router";
 import CatalogueItem from "./CatalogueItem";
+import Route from "../utils/Route";
 
 const sidebarWidth = 300;
 
@@ -67,7 +68,7 @@ const Catalogue = () => {
       </SideBarArea>
       <ItemArea>
         <Router>
-          <CatalogueItemRoute path={`/:widgetId`} />
+          <Route component={CatalogueItemRoute} path={`/:widgetId`} />
         </Router>
       </ItemArea>
     </Layout>
