@@ -51,7 +51,12 @@ export const blockConfig: IBlockConfig = {
 
 const mapTo256 = mapToRange(0)(255)(0)(1);
 
-const Color = styled.div.attrs(({ red, green, blue }) => ({
+interface ColorProps {
+  red: number;
+  green: number;
+  blue: number;
+}
+const Color = styled.div.attrs<ColorProps>(({ red, green, blue }) => ({
   style: {
     background: `rgb(${mapTo256(red)}, ${mapTo256(green)}, ${mapTo256(blue)})`
   }

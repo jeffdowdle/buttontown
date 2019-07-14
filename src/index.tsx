@@ -9,11 +9,37 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { theme } from "./baseTheme";
 import useGlobals from "./utils/useGlobals";
 import GridPage from "./pages/GridPage";
-import Route from './utils/Route';
+import Route from "./utils/Route";
+import { number } from "prop-types";
 
-export const AppContext = React.createContext({});
-export const GridContext = React.createContext({});
-export const GlobalsContext = React.createContext({});
+interface AppContextProps {
+  isDebugMode: boolean;
+  setDebugMode: Function;
+}
+export const AppContext = React.createContext<AppContextProps>({
+  isDebugMode: false,
+  setDebugMode: () => {}
+});
+
+interface GridContextProps {
+  gridWidth: number;
+  gridHeight: number;
+  cellSize: number;
+}
+export const GridContext = React.createContext<GridContextProps>({
+  gridWidth: 10,
+  gridHeight: 10,
+  cellSize: 10
+});
+
+interface GlobalsContextProps {
+  state: any;
+  dispatch: any;
+}
+export const GlobalsContext = React.createContext<GlobalsContextProps>({
+  state: {},
+  dispatch: () => {}
+});
 
 const GlobalStyle = createGlobalStyle`
   * {

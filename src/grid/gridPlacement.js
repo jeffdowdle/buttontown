@@ -1,5 +1,4 @@
 import allWidgets from "../widgets";
-import { viewportHeight } from "../utils/viewport";
 import { matchesSize } from "./blockConfigUtils";
 
 function getRandomIntInclusive(min, max) {

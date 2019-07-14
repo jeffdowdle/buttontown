@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { IBlockConfig, BlockRatio } from "../interfaces";
+import { IBlockConfig, BlockRatio, ICellDimensions } from "../interfaces";
 import Block from "../components/Block";
 import Bevel from "../components/Bevel";
 import { getBlockRatio } from "../grid/blockConfigUtils";
@@ -57,7 +57,10 @@ const horizontalThumb = props => `
   })}
 `;
 
-const HorizontalRangeInput = styled.input`
+const HorizontalRangeInput = styled.input<{
+  dimensions: ICellDimensions;
+  cellSize: number;
+}>`
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
   /* width: 100%; Specific width is required for Firefox. */
   background: transparent; /* Otherwise white in Chrome */

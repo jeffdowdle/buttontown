@@ -6,6 +6,17 @@ import { matchesSize, getBlockRatio } from "./blockConfigUtils";
 
 const BLOCK_INPUT_EVENT = "blockInputEvent";
 
+enum Direction {
+  Top,
+  Bottom,
+  Left,
+  Right,
+  TopLeft,
+  TopRight,
+  BottomLeft,
+  BottomRight
+}
+
 const CellNumber = styled.div`
   background: rgba(0, 0, 0, 0.5);
   color: white;
@@ -71,77 +82,77 @@ const DebugCell = ({ widget, dimensions }) => {
         );
         const pos = size.inputPositions.find(p => p.inputId === input.id);
 
-        let direction = null;
+        let direction: Direction | null = null;
 
         if (pos.x < 0) {
           if (pos.y < 0) {
-            direction = "topleft";
+            direction = Direction.TopLeft;
           } else if (pos.y >= dimensions.height) {
-            direction = "bottomleft";
+            direction = Direction.BottomLeft;
           } else {
-            direction = "left";
+            direction = Direction.Left;
           }
         } else if (pos.x >= dimensions.width) {
           if (pos.y < 0) {
-            direction = "topright";
+            direction = Direction.TopRight;
           } else if (pos.y >= dimensions.height) {
-            direction = "bottomright";
+            direction = Direction.BottomRight;
           } else {
-            direction = "right";
+            direction = Direction.Right;
           }
         } else {
           if (pos.y < 0) {
-            direction = "top";
+            direction = Direction.Top;
           } else if (pos.y >= dimensions.height) {
-            direction = "bottom";
+            direction = Direction.Bottom;
           }
         }
 
         let style = {};
         switch (direction) {
-          case "topleft":
+          case Direction.TopLeft:
             style = {
               top: `0px`,
               left: `0px`
             };
             break;
-          case "bottomleft":
+          case Direction.BottomLeft:
             style = {
               bottom: `0px`,
               left: `0px`
             };
             break;
-          case "left":
+          case Direction.Left:
             style = {
               top: `${pos.y * cellSize + cellSize / 2}px`,
               left: `0px`
             };
             break;
-          case "topright":
+          case Direction.TopRight:
             style = {
               top: `0px`,
               right: `0px`
             };
             break;
-          case "bottomright":
+          case Direction.TopRight:
             style = {
               bottom: `0px`,
               right: `0px`
             };
             break;
-          case "right":
+          case Direction.Right:
             style = {
               top: `${pos.y * cellSize + cellSize / 2}px`,
               right: `0px`
             };
             break;
-          case "top":
+          case Direction.Top:
             style = {
               top: `0px`,
               left: `${pos.x * cellSize + cellSize / 2}px`
             };
             break;
-          case "bottom":
+          case Direction.Bottom:
             style = {
               bottom: `0px`,
               left: `${pos.x * cellSize + cellSize / 2}px`

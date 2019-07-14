@@ -34,15 +34,9 @@ const BevelledButton = styled(Bevel)`
 `;
 
 const Button = ({ colorScheme }) => {
-  const {
-    state: { isNightMode }
-  } = useContext(GlobalsContext);
-
   return (
     <Block>
-      <BevelledButton widthPx={9} as="button" type="button">
-        {/* PRESS */}
-      </BevelledButton>
+      <BevelledButton widthPx={9} as="button" type="button" />
     </Block>
   );
 };

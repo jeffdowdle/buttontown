@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Spacer = styled.div`
+const Spacer = styled.div<{ widthPx: number }>`
   width: calc(100% - ${props => props.widthPx * 2}px);
   height: calc(100% - ${props => props.widthPx * 2}px);
   margin: ${props => props.widthPx}px;
