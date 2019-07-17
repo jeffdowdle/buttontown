@@ -10,12 +10,17 @@ const segmentMap = {
   bottomRight: [0, 1, 3, 4, 5, 6, 7, 8, 9]
 };
 
-const Digit = ({ value, litColor = "white", unlitColor = "grey" }) => {
+interface Props {
+  value: number;
+  onColor: string;
+  offColor: string;
+}
+const Digit = ({ value, onColor, offColor }: Props) => {
   // const color = color(value);
   const color = segment => {
     const isLit = (segmentMap[segment] || []).indexOf(value) >= 0;
 
-    return isLit ? litColor : unlitColor;
+    return isLit ? onColor : offColor;
   };
 
   return (

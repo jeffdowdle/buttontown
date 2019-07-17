@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
 import { IBlockConfig } from "../interfaces";
 import { useTime } from "../utils/useTime";
 import Bevel from "../components/Bevel";
@@ -42,7 +42,22 @@ const nthDigit = (value, n) => {
   return Math.floor(value / Math.pow(10, n - 1)) % 10;
 };
 
-const DigitalClock = ({ inputs }) => {
+const Seperator = ({ onColor }) => {
+  return (
+    <svg width="9px" height="33px" viewBox="0 0 9 33" version="1.1">
+      <polygon
+        fill={onColor}
+        points="3.19744231e-14 32.86 0.507272727 26.9981818 6.42545455 26.9981818 5.91818182 32.86"
+      />
+      <polygon
+        fill={onColor}
+        points="2.36727273 5.86181818 2.87454545 -4.97379915e-14 8.79272727 -4.97379915e-14 8.28545455 5.86181818"
+      />
+    </svg>
+  );
+};
+
+const DigitalClock = ({ inputs, theme }) => {
   const timeMillis = useTime();
   const dateTime = new Date(timeMillis);
 
@@ -55,21 +70,22 @@ const DigitalClock = ({ inputs }) => {
   const third = nthDigit(minutes, 2);
   const fourth = nthDigit(minutes, 1);
 
-  console.log(hours, minutes, first, second, third, fourth);
+  const onColor = theme.illuminated.torquoise;
+  const offColor = "#003529";
 
   return (
     <Screen>
       <ScreenInner>
         <div>
-          <Digit litColor="red" value={first} />
-          <Digit value={second} />
-          <Digit value={third} />
-          <Digit value={fourth} />
-          {/* {dateTime.getHours()}:{dateTime.getMinutes()} */}
+          <Digit onColor={onColor} offColor={offColor} value={first} />
+          <Digit onColor={onColor} offColor={offColor} value={second} />
+          <Seperator onColor={onColor} />
+          <Digit onColor={onColor} offColor={offColor} value={third} />
+          <Digit onColor={onColor} offColor={offColor} value={fourth} />
         </div>
       </ScreenInner>
     </Screen>
   );
 };
 
-export default DigitalClock;
+export default withTheme(DigitalClock);
