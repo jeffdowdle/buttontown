@@ -1,6 +1,5 @@
 const widgetNames = [
   "Button",
-  "Display",
   "Slider",
   "Level",
   "RGBColor",
